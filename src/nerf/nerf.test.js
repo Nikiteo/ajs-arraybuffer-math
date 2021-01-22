@@ -30,5 +30,5 @@ test('attack = 100 + stoned -> attack = 85', () => {
 
 test('attack = 0 -> .attack = 0', () => {
   const mage = new Nerf(0, 2);
-  expect(mage.attack).toBe(85);
+  expect(mage.attack).toBe(0);
 });
