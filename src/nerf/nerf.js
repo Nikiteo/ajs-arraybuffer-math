@@ -1,30 +1,28 @@
 export default class Nerf {
-  constructor(attack) {
+  constructor(attack, dist) {
     this.attack = attack;
     this.stoned = false;
+    this.dist = dist;
   }
 
-  setStoned() {
-    this.stoned = true;
+  set stoned(value) {
+    this.xstoned = value;
   }
 
-  removeStoned() {
-    this.stoned = false;
+  get stoned() {
+    return this.xstoned;
   }
 
-  getАttack(dist) {
-    let resultAttack = this.attack;
+  set attack(value) {
+    this.xattack = value;
+  }
 
-    resultAttack *= (1 - 0.1 * (dist - 1));
+  get attack() {
+    let attack = this.xattack * ((11 - this.dist) / 10);
 
     if (this.stoned) {
-      resultAttack -= Math.log2(dist) * 5;
+      attack -= Math.log2(this.dist) * 5;
     }
-
-    if (resultAttack < 0) {
-      resultAttack = 0;
-    }
-
-    return Math.round(resultAttack, 0);
+    return (attack > 0) ? Math.round(attack) : 0;
   }
 }

@@ -1,51 +1,29 @@
 import Nerf from './nerf.js';
 
-test.each([
-  [1, 100],
-  [2, 90],
-  [3, 80],
-  [4, 70],
-  [5, 60],
-  [6, 50],
-  [7, 40],
-  [8, 30],
-  [9, 20],
-  [10, 10],
-  [11, 0],
-  [15, 0],
-])('should return correct attack without dope', (dist, result) => {
-  const Mag = new Nerf(100);
-  expect(Mag.getАttack(dist)).toBe(result);
+test('distance 2, attack = 9', () => {
+  const mage = new Nerf(10, 2);
+  expect(mage.attack).toBe(9);
 });
 
-test('should set stoned', () => {
-  const Mag = new Nerf(100);
-  Mag.setStoned();
-  expect(Mag.stoned).toBe(true);
+test('distance 3, attack = 8', () => {
+  const mage = new Nerf(10, 3);
+  expect(mage.attack).toBe(8);
 });
 
-test('should remove stoned', () => {
-  const Mag = new Nerf(100);
-  Mag.setStoned();
-  Mag.removeStoned();
-  expect(Mag.stoned).toBe(false);
+test('distance 4, attack = 7', () => {
+  const mage = new Nerf(10, 4);
+  expect(mage.attack).toBe(7);
 });
 
-test.each([
-  [1, 100],
-  [2, 85],
-  [3, 72],
-  [4, 60],
-  [5, 48],
-  [6, 37],
-  [7, 26],
-  [8, 15],
-  [9, 4],
-  [10, 0],
-  [11, 0],
-  [15, 0],
-])('should return correct attack with dope', (dist, result) => {
-  const Mag = new Nerf(100);
-  Mag.setStoned();
-  expect(Mag.getАttack(dist)).toBe(result);
+test('.stoned = true', () => {
+  const mage = new Nerf(10, 1);
+  mage.stoned = true;
+  expect(mage.stoned).toBe(true);
+});
+
+test('attack = 100 + stoned -> attack = 85', () => {
+  const mage = new Nerf(null, 2);
+  mage.attack = 100;
+  mage.stoned = true;
+  expect(mage.attack).toBe(85);
 });
